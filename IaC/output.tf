@@ -1,83 +1,39 @@
-
-###############
-#  key pair  #
-###############
-
-output "aws_key_pair" {
-  description = "key pair"
-  value = aws_key_pair.bastion-key-pair.key_name
-  
-}
-
-###############
-#    vpc id   # 
-###############
-
 output "vpc_id" {
-  description = "VPC_ID"
-  value = module.vpc.vpc_id
+  description = "VPC ID"
+  value       = module.network.vpc_id
 }
-
-###############
-# subnet ids  #
-###############
 
 output "public_subnet_id" {
-  description = "public subnet id"
-  value = module.vpc.public_subnets[0]
-  
+  description = "Public subnet ID"
+  value       = module.network.public_subnet_id
 }
 
 output "private_subnet_id" {
-  description = "private subnet id"
-  value = module.vpc.private_subnets[0]
-  
+  description = "Private subnet ID"
+  value       = module.network.private_subnet_id
 }
 
-################
-#install docker#
-################
-
-output "installing-docker" {
-    description = "installing docker script"
-    value = data.template_file.installing-docker.rendered
+output "bastion_public_ip" {
+  description = "Bastion host public IP"
+  value       = module.bastion.bastion_public_ip
 }
 
-###############
-#   ami id    # 
-###############
-
-output "aws_ami_id" {
-  description = "AWS AMI ID"
-  value = data.aws_ami.ubuntu.id
-  
+output "bastion_key_pair" {
+  description = "Bastion key pair name"
+  value       = module.bastion.key_pair_name
 }
 
-###############
-#    sg id    #
-###############
-
-output "bastion_sg_id" {
-  description = "bastion security group id"
-  value = aws_security_group.bastion-sg.id
-  
+output "nat_instance_id" {
+  description = "NAT instance ID"
+  value       = module.nat_instance.instance_id
 }
 
-output "db_sg_id" {
-  description = "db instance security group id"
-  value = aws_security_group.db-sg.id
-  
+output "server_instance_id" {
+  description = "Server instance ID"
+  value       = module.compute.server_instance_id
 }
 
-output "natinstance_sg_id" {
-  description = "nat instance security group id"
-  value = aws_security_group.nat-instance-sg.id
-  
+output "db_instance_id" {
+  description = "DB instance ID"
+  value       = module.compute.db_instance_id
 }
-
-output "server_sg_id" {
-  description = "server security group id"
-  value = aws_security_group.server-sg.id
-  
-}
-
